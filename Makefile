@@ -3,7 +3,7 @@
 
 include config.mk
 
-SRC = drw.c dmenu.c stest.c util.c
+SRC = drw.c dmenu.c stest.c util.c minilibidentif.c
 OBJ = $(SRC:.c=.o)
 
 all: dmenu stest
@@ -14,10 +14,10 @@ all: dmenu stest
 config.h:
 	cp config.def.h $@
 
-$(OBJ): arg.h config.h config.mk drw.h
+$(OBJ): arg.h config.h config.mk drw.h minilibidentif.h
 
-dmenu: dmenu.o drw.o util.o
-	$(CC) -o $@ dmenu.o drw.o util.o $(LDFLAGS)
+dmenu: dmenu.o drw.o util.o minilibidentif.o
+	$(CC) -o $@ dmenu.o drw.o util.o minilibidentif.o $(LDFLAGS)
 
 stest: stest.o
 	$(CC) -o $@ stest.o $(LDFLAGS)

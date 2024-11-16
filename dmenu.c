@@ -18,6 +18,7 @@
 
 #include "drw.h"
 #include "util.h"
+#include "minilibidentif.h"
 
 /* macros */
 #define INTERSECT(x,y,w,h,r)  (MAX(0, MIN((x)+(w),(r).x_org+(r).width)  - MAX((x),(r).x_org)) \
@@ -51,6 +52,8 @@ static XIC xic;
 
 static Drw *drw;
 static Clr *scheme[SchemeLast];
+
+element ** database;
 
 #include "config.h"
 
@@ -99,6 +102,17 @@ static void
 cleanup(void)
 {
 	size_t i;
+	int j;
+	struct item *item;
+
+	if (probabilistic) {
+		j=0;
+		for (item = items; item && item->text; ++item)	{
+			destroy_element(*(database+j));
+			j++;
+		}
+		free(database);
+	}
 
 	XUngrabKey(dpy, AnyKey, AnyModifier, root);
 	for (i = 0; i < SchemeLast; i++)
@@ -614,6 +628,8 @@ static void
 setup(void)
 {
 	int x, y, i, j;
+	int numitems = 0;
+	struct item *item;
 	unsigned int du;
 	XSetWindowAttributes swa;
 	XIM xim;
@@ -631,6 +647,19 @@ setup(void)
 
 	clip = XInternAtom(dpy, "CLIPBOARD",   False);
 	utf8 = XInternAtom(dpy, "UTF8_STRING", False);
+
+	if (probabilistic) {
+        	for (item = items; item && item->text; item++) {
+			numitems++;
+		}
+		database=(element **) malloc(numitems*sizeof(element *));
+		i=0;
+		for (item = items; item && item->text; item++) {
+			*(database+i)=str2elem (item->text);
+			i++;
+		}
+		printf("Database loaded\n");
+	}
 
 	/* calculate menu geometry */
 	bh = drw->fonts->h + 2;
@@ -731,6 +760,8 @@ main(int argc, char *argv[])
 			exit(0);
 		} else if (!strcmp(argv[i], "-b")) /* appears at the bottom of the screen */
 			topbar = 0;
+		else if (!strcmp(argv[i], "-prob")) /* probabilistic selection */
+			probabilistic = 1;
 		else if (!strcmp(argv[i], "-f"))   /* grabs keyboard before reading stdin */
 			fast = 1;
 		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
