@@ -8,7 +8,7 @@
 #include "minilibidentif.h"
 
 double * getgr(element * num1, element * num2, int max)
-/* This is the function exctracting the probabilities (the sums of) relative to an offset when confronting two compound elements */
+/* This is the function extracting the probabilities (the sums of) relative to an offset when confronting two compound elements */
 {
 	/*Incudi svariati check */
 	int i,offset;
@@ -72,7 +72,7 @@ double find_prob(element * num1, element * num2)
 		return(result);
 	}
 	
-	/* There is no matching: samething has gone bad, let's assume a zero probaility*/
+	/* There is no matching: something has gone bad, let's assume a zero probability*/
 	result=0.0;
 	return(result);
 }
@@ -91,7 +91,7 @@ double fatt(double arg)
 		return(aux);
 	}
 	else
-	/* approssima i arg non interi con la retta passante per i due interi piu' vicini con y=(x-i)*(fatt(i+1)-fatt(i))-fatt(i) */
+	/* approximates non-integer arg with the line passing through the two nearest integers with y=(x-i)*(fatt(i+1)-fatt(i))-fatt(i) */
 	{
 		double aux;
 		double min,max;
@@ -107,7 +107,7 @@ double fatt(double arg)
 double binom(double n, double k)
 {
 	if (floor(k)==k)
-	/* gestisce i numeri con k intero */
+	/* handles numbers with integer k */
 	{
 		double i;
 		double aux=1;
@@ -118,7 +118,7 @@ double binom(double n, double k)
 		return(aux/fatt(k));	
 	}
 	else	
-	/* approssima i k non interi con la retta passante per i due interi piu' vicini con y=(x-i)*(binom(n,i+1)-binom(n,i))-binom(n.i) */
+	/* approximates non-integer k with the line passing through the two nearest integers with y=(x-i)*(binom(n,i+1)-binom(n,i))-binom(n,i) */
 	{
 		double aux;
 		double min,max;

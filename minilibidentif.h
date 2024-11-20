@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-/* Definisce tutte le funzioni di calcolo combinatorio necessarie al programma per funzionare */
+/* Defines all the combinatorial calculation functions necessary for the program to work */
 double fatt(double arg);
 double binom(double n, double k);
 
