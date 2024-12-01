@@ -1,15 +1,17 @@
 dmenu - dynamic menu - with probabilistic selection
 ====================
-dmenu is an efficient dynamic menu for X. This is a fork of the original dmenu with the addition of probabilistic selection. This means that the selection of the item is based on the probability of the item being selected. 
 
+dmenu is an efficient dynamic menu for X. This is a fork of the original dmenu with the addition of probabilistic selection. This means that the selection of the item is based on the probability of the written text is the same as one of the items in the list.  
 
 Requirements
 ------------
+
 In order to build dmenu you need the Xlib header files.
 
 
 Installation
 ------------
+
 Edit config.mk to match your local setup (dmenu is installed into
 the /usr/local namespace by default).
 
@@ -21,4 +23,5 @@ Afterwards enter the following command to build and install dmenu
 
 Running dmenu
 -------------
+
 See the man page for details.
