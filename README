@@ -1,6 +1,6 @@
-dmenu - dynamic menu
+dmenu - dynamic menu - with probabilistic selection
 ====================
-dmenu is an efficient dynamic menu for X.
+dmenu is an efficient dynamic menu for X. This is a fork of the original dmenu with the addition of probabilistic selection. This means that the selection of the item is based on the probability of the item being selected. 
 
 
 Requirements
