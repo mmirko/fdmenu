@@ -810,7 +810,7 @@ setup(void)
 			*(database + i) = str2elem(item->text);
 			i++;
 		}
-		printf("Database loaded\n");
+		// printf("Database loaded\n");
 	}
 
 	/* calculate menu geometry */
